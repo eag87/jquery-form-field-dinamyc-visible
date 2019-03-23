@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Form visualizzare campi o nasconderli</title>
+	<!-- 
+	Script per utilizzare jQuery
+	 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+	/************************/
+	$.noConflict();
+	jQuery( document ).ready(function( $ ) {
+
+		//chiamo la funzione per rendere invisibili tutti i cambi (quelli con classe .cnt-campi)
+		//E mi restituisce il numero dei campi 
+		var max_campi = nascondo_campi_form();
+	//evento di quando cambio valore alla select del numero dei campi
+		  jQuery("select[name='numero_campi']").on('change', function() {
+				//recupero il valore della select
+				var campi_sel = this.value;
+				//se maggiore di zero vado ad attivare i campi altrimenti li nascondo tutti
+				if(campi_sel > 0){
+					//ciclo per il numero totale dei campi
+					for (var i = 1; i <= max_campi; ++ i){
+						var elem = jQuery(".cnt-campo.campo_"+i);
+						//se il campo i deve essere attivo controllo se già lo è.. altrimenti lo rendo visibile
+						if (i<=campi_sel){
+							if(elem.is(':visible')){
+
+							}else{
+
+								elem.fadeIn();
+							}
+						}else{
+							//se il campo i non deve essere attivo, lo nascondo
+							elem.fadeOut();
+						}
+					}
+
+				}else{
+					nascondo_campi_form();
+					}
+			});      
+
+
+		function nascondo_campi_form(){
+			var n_campi = 0
+			jQuery(".cnt-campo").each(function(){
+
+				jQuery(this).fadeOut();
+				n_campi++;
+				});
+			return n_campi;
+		}
+
+	})
+	</script>
+
+</head>
+
+	<body>
+	<form method="post" action="#">
+			<table class="table" width="40%">
+				<tr class="table_header">
+					<td colspan="2">Contact Form</td>
+				</tr>
+				<tr class="row1">
+					<td>Email:</td>
+					<td>
+						<input name="email" type="text" />
+					</td>
+				</tr>
+				<tr class="row1">
+					<td>Subject:</td>
+					<td>
+						<input name="subject" type="text" />
+					</td>
+				</tr>
+				<tr class="row1">
+					<td>Numero Campi:</td>
+					<td>
+						<select name="numero_campi">
+							<option value="">Seleziona</option>
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option> 
+							<option value="4">4</option> 
+							<option value="5">5</option> 
+							<option value="6">6</option> 
+						</select>
+					</td>
+				</tr>
+				<tr class="row1 cnt-campo campo_1">
+					<td>Campo1:</td>
+					<td>
+						<select name="campo_1"><option value="">Seleziona</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+						</select>
+					</td>
+				</tr>
+				<tr class="row1 cnt-campo campo_2">
+					<td>Campo2:</td>
+					<td>
+						<select name="campo_2"><option value="">Seleziona</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+						</select>
+					</td>
+				</tr>
+				<tr class="row1 cnt-campo campo_3">
+					<td>Campo3:</td>
+					<td>
+						<select name="campo_3"><option value="">Seleziona</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+						</select>
+					</td>
+				</tr>
+				<tr class="row1 cnt-campo campo_4">
+					<td>Campo4:</td>
+					<td>
+						<select name="campo_4"><option value="">Seleziona</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+						</select>
+					</td>
+				</tr>
+				<tr class="row1 cnt-campo campo_5">
+					<td>Campo5:</td>
+					<td>
+						<select name="campo_5"><option value="">Seleziona</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+						</select>
+					</td>
+				</tr>
+				<tr class="row1 cnt-campo campo_6">
+					<td>Campo6:</td>
+					<td>
+						<select name="campo_6"><option value="">Seleziona</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+						</select>
+					</td>
+				</tr>
+				<tr class="row1">
+					<td valign="top">Message:</td>
+					<td>
+						<textarea name="message" rows="8" cols="40"></textarea>
+					</td>
+				</tr>
+				<tr class="row1">
+					<td>&nbsp;</td>
+					<td>
+						<input type="submit" value="Send Message" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>
+
+
